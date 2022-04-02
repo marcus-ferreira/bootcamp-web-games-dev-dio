@@ -1,0 +1,200 @@
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 40px;
+	color: #603a03;
+}
+
+body {
+	background-image: url(../artwork/background_title.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+
+}
+
+#container {
+	width: 950px;
+	height: auto;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#fundoGame {
+	width: 950px;
+	height: 630px;
+	background-image: url(../artwork/background_game.png);
+	background-position: center;
+	background-size: cover;
+	border-color: #fff;
+	border-style: solid;
+}
+
+#jogador {
+	width: 127px;
+	height: 59px;
+	position: absolute;
+	top: 179px;
+	left: 30px;
+	background-image: url(../artwork/helicopter127x59.png);
+}
+
+#inimigo1 {
+	width: 103px;
+	height: 56px;
+	position: absolute;
+	top: 253px;
+	left: 800px;
+	background-image: url(../artwork/enemy103x56.png);
+}
+
+#inimigo2 {
+	width: 121px;
+	height: 76px;
+	position: absolute;
+	top: 447px;
+	left: 775px;
+	background-image: url(../artwork/truck121x76.png);
+}
+
+#amigo {
+	width: 50px;
+	height: 39px;
+	position: absolute;
+	top: 480px;
+	left: 10px;
+	background-image: url(../artwork/npc50x39.png);
+}
+
+#inicio {
+	width: 350px;
+	height: auto;
+	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	text-align: center;
+	padding: 10px;
+}
+
+.anima1 {
+	background-image: url(../artwork/helicopter127x59.png);
+	animation: play 0.1s steps(2) infinite;
+}
+
+.anima2 {
+	background-image: url(../artwork/enemy103x56.png);
+	animation: playEnemy 0.1s steps(2) infinite;
+}
+
+.anima3 {
+	background-image: url(../artwork/truck121x76.png);
+	animation: playTruck 0.5s steps(4) infinite;
+}
+
+.anima4 {
+	background-image: url(../artwork/npc50x39.png);
+	animation: playNPC 0.5s steps(8) infinite;
+}
+
+@keyframes play {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: -254px;
+	}
+}
+
+@keyframes playEnemy {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: -206px;
+	}
+}
+
+@keyframes playTruck {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: -484px;
+	}
+}
+
+@keyframes playNPC {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: -400px;
+	}
+}
+
+#disparo {
+	width: 32px;
+	height: 8px;
+	position: absolute;
+	background-image: url(../artwork/bullet32x8.png);
+}
+
+#explosao1 {
+	width: 15px;
+	height: 87px;
+	position: absolute;
+}
+
+#explosao2 {
+	width: 15px;
+	height: 87px;
+	position: absolute;
+}
+
+#explosao2 {
+	width: 15px;
+	height: 87px;
+	position: absolute;
+}
+
+#placar {
+	width: 450px;
+	height: 50px;
+	position: absolute;
+	left: 5px;
+	top: 590px;
+}
+
+h2 {
+	font-size: 20px;
+	color: #fff;
+}
+
+#energia {
+	width: 64px;
+	height: 18px;
+	position: absolute;
+	left: 750px;
+	top: 7px;
+}
+
+h3 {
+	font-size: 20px;
+	color: #603a03;
+}
+
+#fim {
+	width: 350px;
+	height: 200px;
+	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	text-align: center;
+	padding: 10px;
+}
