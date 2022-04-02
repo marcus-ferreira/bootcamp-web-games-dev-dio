@@ -26,7 +26,7 @@ let lightColor = (element, number) => {
 	number = number * 500;
 	setTimeout(() => {
 		element.classList.add("selected");
-	}, tempo - 250);
+	}, number - 250);
 	setTimeout(() => {
 		element.classList.remove("selected");
 	});
@@ -42,7 +42,7 @@ let checkOrder = () => {
 	}
 
 	if (clickedOrder.length == order.length) {
-		alert(`Pontuação: ${score}\nVocê acertou! Iniciano próximo nível!`);
+		alert(`Pontuação: ${score}\nVocê acertou! Iniciando próximo nível!`);
 		nextLevel();
 	}
 }
@@ -50,10 +50,10 @@ let checkOrder = () => {
 // Função para o clique do usuário
 let click = (color) => {
 	clickedOrder[clickedOrder.length] = color;
-	elementColor(color).classList.add("selected");
+	createColorElement(color).classList.add("selected");
 
 	setTimeout(() => {
-		elementColor(color).classList.remove("selected");
+		createColorElement(color).classList.remove("selected");
 		checkOrder();
 	}, 250);
 }
@@ -72,7 +72,7 @@ let createColorElement = (color) => {
 }
 
 // Função para o próximo nível
-let nextlevel = () => {
+let nextLevel = () => {
 	score++;
 	shuffleOrder();
 }
@@ -91,7 +91,7 @@ let playGame = () => {
 	alert(`Bem vindo ao Genius!\nIniciando um novo jogo!`);
 	score = 0;
 
-	nextlevel();
+	nextLevel();
 }
 
 green.onclick = () => click(0);
@@ -100,3 +100,4 @@ yellow.onclick = () => click(2);
 blue.onclick = () => click(3);
 
 playGame();
+ 
