@@ -82,35 +82,23 @@ const ctx = canvas.getContext('2d');
 const gravity = 0.8;
 const player = new Player();
 const background = new Background();
-const cacti = [];
 const keys = {};
-
-addEventListener('keydown', event => { keys[event.key] = true; });
-addEventListener('keyup', event => { keys[event.key] = false; })
+let cacti = [];
 
 
 // Variables
 let score = 0;
+let highscore = 0;
 let time = 0;
 let gameState = 'title';
 
 
 // Initialize game
-init();
+titleScreen();
 
 
-// Initialize game
-function init() {
-
-	// Restart variables
-	score = 0;
-	time = 0;
-	gameState = 'title';
-
-	// Play title screen
-	titleScreen();
-}
-
+addEventListener('keydown', event => { keys[event.key] = true; });
+addEventListener('keyup', event => { keys[event.key] = false; })
 
 // Draw title screen
 function titleScreen() {
@@ -126,59 +114,87 @@ function titleScreen() {
 	let startgame = setInterval(() => {
 		if (keys[' ']) {
 			gameState = 'play';
-			gameLoop();
+			init();
 			clearInterval(startgame);
 		}
 	}, 1000 / 60);
 }
 
 
+// Initialize game
+function init() {
+	player.y = canvas.height - 60;
+	player.vSpeed = 0;
+	player.isJumping = false;
+	background.x = 0;
+	cacti = [];
+	score = 0;
+	time = 0;
+	gameState = 'play';
+	if (window.localStorage.getItem('highscore')) {
+		highscore = window.localStorage.getItem('highscore');
+	} else {
+		highscore = 0;
+	}
+	gameLoop();
+}
+
+
 // Game loop
 function gameLoop() {
-	requestAnimationFrame(gameLoop);
-
-	// Increments timer
-	time++;
-
-	// Clear canvas
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-	// Draw sprites
-	background.draw();
-	player.draw();
-
-	// Draw score
-	score = parseInt(time / 10);
-	ctx.font = "30px Arial";
-	ctx.textAlign = 'left';
-	ctx.fillText(`Score: ${score}`, 10, 30);
-
-	// Move background
-	background.move();
-
-	// Create cactus on random time
-	if (time % 10 == 0) {
-		createCactus();
-	}
-
-	// Draw and move cactus
-	for (let i = 0; i < cacti.length; i++) {
-		const cactus = cacti[i];
-
-		if (cactus.x <= -60) {
-			cacti.splice(cacti[i]);
-		} else {
-			cactus.draw();
-			cactus.move();
+	if (gameState === 'play') {
+		// Increments timer
+		time++;
+	
+		// Clear canvas
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+		// Draw sprites
+		background.draw();
+		player.draw();
+	
+		// Draw score
+		score = parseInt(time / 10);
+		ctx.font = "30px Arial";
+		ctx.textAlign = 'left';
+		ctx.fillText(`Score: ${score}`, 10, 30);
+	
+		// Draw highscore
+		if (score > highscore) {
+			highscore = score;
 		}
+		ctx.textAlign = 'right';
+		ctx.fillText(`Highscore: ${highscore}`, canvas.width - 10, 30);
 
-		console.log(cacti);
+
+		// Move background
+		background.move();
+	
+		// Create cactus on random time
+		if (time % 100 == 0) {
+			createCactus();
+		}
+	
+		// Draw and move cactus
+		cacti.forEach(cactus => {
+			if (cactus.x <= -60) {
+				cacti.splice(cactus, 1);
+			} else {
+				cactus.draw();
+				cactus.move();
+		
+				// Check collision with cactus
+				if (isColliding(player, cactus)) {
+					gameOver();
+				}
+			}
+		});
+		
+		requestAnimationFrame(gameLoop);
+	} else {
+		cancelAnimationFrame(gameLoop);
 	}
 
-	// Check collision with cactus
-	// if (isColliding(player, cactus)) {
-	// gameOver();
-	// }
 
 	// Player jump
 	if (keys[' '] && !player.isJumping) {
@@ -206,8 +222,10 @@ function createCactus() {
 }
 
 // Check collision with cactus
-function isColliding(player, cactus) {
-	return player.x + player.width >= cactus.x && player.x <= cactus.x + cactus.width && player.y + player.height >= cactus.y;
+function isColliding(obj1, obj2) {
+	return obj1.x + obj1.width >= obj2.x &&
+		obj1.x <= obj2.x + obj2.width &&
+		obj1.y + obj1.height >= obj2.y;
 }
 
 
@@ -215,10 +233,22 @@ function isColliding(player, cactus) {
 function gameOver() {
 	gameState = 'gameOver';
 
+	// Save highscore
+	window.localStorage.setItem('highscore', highscore);
+	
 	// Draw game over text
 	ctx.textAlign = 'center';
 	ctx.font = '60px Arial';
 	ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
 	ctx.font = '30px Arial';
 	ctx.fillText(`Press space to replay`, canvas.width / 2, canvas.height / 2 + 60);
+	
+	// Start game
+	let startgame = setInterval(() => {
+		if (keys[' ']) {
+			gameState = 'play';
+			init();
+			clearInterval(startgame);
+		}
+	}, 1000 / 60);
 }
