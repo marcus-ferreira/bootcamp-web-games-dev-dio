@@ -2,10 +2,9 @@ class Cactus {
 	constructor() {
 		this.x = canvas.width;
 		this.y = canvas.height - 60;
+		this.sprite = createCactusSprite();
 		this.width = 60;
 		this.height = 60;
-		this.sprite = new Image();
-		this.sprite.src = '../art/cactus.png';
 		this.speed = 8;
 	};
 
@@ -46,6 +45,7 @@ const player = {
 	y: canvas.height - 60,
 	width: 60,
 	height: 60,
+	sprite: createPlayerSprite(),
 	vSpeed: 0,
 	jumpForce: 16,
 	isJumping: false,
@@ -65,6 +65,7 @@ const background = {
 	y: 0,
 	width: 525,
 	height: 200,
+	sprite: createBackgroundSprite(),
 	speed: 4,
 
 	draw() {
@@ -81,15 +82,6 @@ const background = {
 	},
 }
 
-async () => {
-	player.sprite = new Image();
-	player.sprite.src = '../art/dino.png';
-	background.sprite = new Image();
-	background.sprite.src = '../art/background.png';
-	await player.sprite.decode();
-	
-}
-
 addEventListener('keydown', event => {
 	if (event.key in keys) {
 		keys[event.key] = true;
@@ -100,6 +92,28 @@ addEventListener('keyup', event => {
 		keys[event.key] = false;
 	}
 });
+
+function createPlayerSprite() {
+	let playerSprite = new Image();
+	playerSprite.src = '../art/dino.png';
+	canvas.appendChild(playerSprite);
+	return playerSprite;
+}
+
+function createBackgroundSprite() {
+	let backgroundSprite = new Image();
+	backgroundSprite.src = '../art/background.png';
+	canvas.appendChild(backgroundSprite);
+	return backgroundSprite;
+}
+
+function createCactusSprite() {
+	let cactusSprite = new Image();
+	cactusSprite.src = '../art/cactus.png';
+	canvas.appendChild(cactusSprite);
+	return cactusSprite;
+}
+
 
 // Draw title screen
 function titleScreen() {
@@ -176,7 +190,6 @@ function gameLoop() {
 			if (random === 0) {
 				cacti.push(new Cactus());
 			}
-			console.log(random);
 		}
 
 		// Decrease cactus spawn time
