@@ -33,7 +33,7 @@ const ctx = canvas.getContext('2d');
 const gravity = 0.8;
 
 // Variables
-let keys = {" ": false};
+let keys = { " ": false };
 let cacti = [];
 let cactusSpawnTime = 100;
 let score = 0;
@@ -46,7 +46,6 @@ const player = {
 	y: canvas.height - 60,
 	width: 60,
 	height: 60,
-	sprite: new Image(),
 	vSpeed: 0,
 	jumpForce: 16,
 	isJumping: false,
@@ -66,7 +65,6 @@ const background = {
 	y: 0,
 	width: 525,
 	height: 200,
-	sprite: new Image(),
 	speed: 4,
 
 	draw() {
@@ -83,17 +81,21 @@ const background = {
 	},
 }
 
-window.onload = () => {
+async () => {
+	player.sprite = new Image();
 	player.sprite.src = '../art/dino.png';
+	background.sprite = new Image();
 	background.sprite.src = '../art/background.png';
-};
+	await player.sprite.decode();
+	
+}
 
-addEventListener('keydown', event => { 
+addEventListener('keydown', event => {
 	if (event.key in keys) {
 		keys[event.key] = true;
 	}
 });
-addEventListener('keyup', event => { 
+addEventListener('keyup', event => {
 	if (event.key in keys) {
 		keys[event.key] = false;
 	}
@@ -181,7 +183,7 @@ function gameLoop() {
 		if (time % 100 === 0) {
 			cactusSpawnTime--;
 		}
-	
+
 		// Draw and move cactus
 		cacti.forEach(cactus => {
 			if (cactus.x <= -60) {
