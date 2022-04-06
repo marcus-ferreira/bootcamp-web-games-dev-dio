@@ -60,7 +60,6 @@ const player = {
 		this.vSpeed -= this.jumpForce;
 	},
 };
-player.sprite.src = '../art/dino.png';
 
 const background = {
 	x: 0,
@@ -83,8 +82,11 @@ const background = {
 		}
 	},
 }
-background.sprite.src = '../art/background.png';
 
+window.onload = () => {
+	player.sprite.src = '../art/dino.png';
+	background.sprite.src = '../art/background.png';
+};
 
 addEventListener('keydown', event => { 
 	if (event.key in keys) {
