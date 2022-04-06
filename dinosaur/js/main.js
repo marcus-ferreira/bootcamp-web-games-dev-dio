@@ -2,10 +2,12 @@ class Cactus {
 	constructor() {
 		this.x = canvas.width;
 		this.y = canvas.height - 60;
-		this.sprite = createCactusSprite();
+		this.sprite = new Image();
+		this.sprite.src = 'images/cactus.png';
 		this.width = 60;
 		this.height = 60;
 		this.speed = 8;
+		this.sprite.onload() = this.draw();
 	};
 
 	draw() {
@@ -45,7 +47,7 @@ const player = {
 	y: canvas.height - 60,
 	width: 60,
 	height: 60,
-	sprite: createPlayerSprite(),
+	sprite: new Image(),
 	vSpeed: 0,
 	jumpForce: 16,
 	isJumping: false,
@@ -65,7 +67,7 @@ const background = {
 	y: 0,
 	width: 525,
 	height: 200,
-	sprite: createBackgroundSprite(),
+	sprite: new Image(),
 	speed: 4,
 
 	draw() {
@@ -82,6 +84,16 @@ const background = {
 	},
 }
 
+player.sprite.onload = () => {
+	player.sprite.src = '../art/dino.png';
+	player.draw();
+}
+
+background.sprite.onload = () => {
+	background.sprite.src = '../art/background.png';
+	background.draw();
+}
+
 addEventListener('keydown', event => {
 	if (event.key in keys) {
 		keys[event.key] = true;
@@ -92,27 +104,6 @@ addEventListener('keyup', event => {
 		keys[event.key] = false;
 	}
 });
-
-function createPlayerSprite() {
-	let playerSprite = new Image();
-	playerSprite.src = '../art/dino.png';
-	canvas.appendChild(playerSprite);
-	return playerSprite;
-}
-
-function createBackgroundSprite() {
-	let backgroundSprite = new Image();
-	backgroundSprite.src = '../art/background.png';
-	canvas.appendChild(backgroundSprite);
-	return backgroundSprite;
-}
-
-function createCactusSprite() {
-	let cactusSprite = new Image();
-	cactusSprite.src = '../art/cactus.png';
-	canvas.appendChild(cactusSprite);
-	return cactusSprite;
-}
 
 
 // Draw title screen
