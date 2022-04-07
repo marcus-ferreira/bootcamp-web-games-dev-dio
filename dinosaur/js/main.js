@@ -7,7 +7,6 @@ class Cactus {
 		this.width = 60;
 		this.height = 60;
 		this.speed = 8;
-		this.sprite.onload() = this.draw();
 	};
 
 	draw() {
@@ -61,6 +60,7 @@ const player = {
 		this.vSpeed -= this.jumpForce;
 	},
 };
+player.sprite.src = '../art/dino.png';
 
 const background = {
 	x: 0,
@@ -83,16 +83,7 @@ const background = {
 		}
 	},
 }
-
-player.sprite.onload = () => {
-	player.sprite.src = '../art/dino.png';
-	player.draw();
-}
-
-background.sprite.onload = () => {
-	background.sprite.src = '../art/background.png';
-	background.draw();
-}
+background.sprite.src = '../art/background.png';
 
 addEventListener('keydown', event => {
 	if (event.key in keys) {
