@@ -10,6 +10,6 @@ Repository created for DIO bootcamps projects.
 - [Shooter](https://marcus-ferreira.github.io/bootcamp-web-games-dev-dio/games/shooter/) - Made with jQuery and jQuery collision.
 - [Genius Clone](https://marcus-ferreira.github.io/bootcamp-web-games-dev-dio/games/genius/) - Made with HTML, CSS and JavaScript.
 
-## JavaScript
+## HTML / CSS
 
-- WIP
+- [Instagram Login Clone](https://github.com/marcus-ferreira/bootcamps-dio/tree/main/html-css/instagram-clone)
