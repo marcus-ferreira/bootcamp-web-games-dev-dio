@@ -1,0 +1,101 @@
+/* Variables */
+:root {
+	--red: #e50914;
+	--black: #141414;
+}
+
+/* Reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--black);
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+header .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .logo {
+	color: var(--red);
+	font-family: 'Arial Black', Helvetica, sans-serif;
+	font-size: 40px;
+	margin-left: 5px;
+}
+
+header nav a {
+	text-decoration: none;
+	color: #aaa;
+	margin-right: 10px;
+}
+
+header nav a:hover {
+	color: #fff;
+}
+
+.filme-principal {
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) 100%), url('https://www.themoviedb.org/t/p/original/ex4kvQb0Ski5KL2fsnKQU2hV3oo.jpg');
+	background-size: cover;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding-bottom: 40px;
+	padding-top: 40px;
+}
+
+.filme-principal .descricao {
+	margin-top: 10px;
+	margin-bottom: 90px;
+}
+
+.filme-principal .container {
+	width: 70%;
+}
+
+.titulo {
+	font-size: 40px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.botao {
+	background-color: rgba(0, 0, 0, 0.5);
+	border: none;
+	color: white;
+	padding: 15px 30px;
+	margin-right: 15x;
+	font-size: 12px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.botao:active {
+	background-color: white;
+	color: black;
+}
+
+.botao i {
+	margin-right: 8px;
+}
+
+.container {
+	margin-left: 20px;
+}
+
+.box-filme {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+
+.carrossel-filmes {
+	margin-top: 5px;
+}
